@@ -1,0 +1,31 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:config.properties"/>
+    </bean>
+
+
+    <bean id="person" class="org.chdtu.Person">
+        <constructor-arg index="0" value="${person.name}"/>
+        <constructor-arg index="1" value="${person.age}"/>
+        <property name="address" ref="address"/>
+    </bean>
+
+
+    <bean id="address" class="org.chdtu.Address">
+        <property name="city" value="${address.city}"/>
+        <property name="street" value="${address.street}"/>
+        <property name="houseNumber" value="${address.houseNumber}"/>
+    </bean>
+
+    <bean id="personDetails" class="org.chdtu.PersonDetails">
+        <property name="person" ref="person"/>
+        <property name="additionalInfo" value="${personDetails.additionalInfo}"/>
+        <property name="someOtherProperty" value="someValue"/>
+
+    </bean>
+</beans>
